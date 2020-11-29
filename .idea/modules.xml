@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../efigas/.idea/Efigas.iml" filepath="$PROJECT_DIR$/../efigas/.idea/Efigas.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/pagos.efigas.iml" filepath="$PROJECT_DIR$/.idea/pagos.efigas.iml" />
     </modules>
   </component>
