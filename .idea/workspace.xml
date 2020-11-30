@@ -141,6 +141,8 @@
       <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
       <path value="$PROJECT_DIR$/vendor/paypal/rest-api-sdk-php" />
       <path value="$PROJECT_DIR$/vendor/laravel/ui" />
+      <path value="$PROJECT_DIR$/vendor/mews/captcha" />
+      <path value="$PROJECT_DIR$/vendor/intervention/image" />
     </include_path>
   </component>
   <component name="ProjectId" id="1kyIQWw9kGbMRMbkJwQ9Mx22ARn" />
@@ -176,7 +178,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606666392890</updated>
-      <workItem from="1606666395542" duration="7251000" />
+      <workItem from="1606666395542" duration="10946000" />
     </task>
     <servers />
   </component>

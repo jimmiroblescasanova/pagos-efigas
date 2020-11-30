@@ -2,7 +2,7 @@
 
 @section('content')
 <div id="layoutAuthentication">
-    <div id="layoutAuthentication_content">
+    <div id="layoutAuthentication_content" class="mb-3">
         <main>
             <div class="container">
                 <div class="row justify-content-center">
@@ -10,15 +10,38 @@
                         <div class="card shadow-lg border-0 rounded-lg mt-5">
                             <div class="card-header"><h3 class="text-center font-weight-light my-4">Pago vía PayPal</h3></div>
                             <div class="card-body">
-                                <form action="{{ route('payments.index') }}" method="POST">
+                                <form action="{{ route('payments.validate') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
-                                        <label class="small mb-1" for="inputPaymentReference">Referencia de pago</label>
-                                        <input class="form-control py-4" id="inputPaymentReference" type="text" name="paymentReference" placeholder="Ingrese la referencia de pago" />
+                                        <label class="small mb-1" for="paymentReference">Referencia de pago</label>
+                                        <input class="form-control py-4 {{ $errors->first('paymentReference') ? 'is-invalid' : '' }}"
+                                               id="paymentReference"
+                                               type="text"
+                                               name="paymentReference"
+                                               value="{{ old('paymentReference') }}"
+                                               placeholder="Ingrese la referencia de pago" />
+                                        {!! $errors->first('paymentReference', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
                                     <div class="form-group">
-                                        <label class="small mb-1" for="inputRfc">RFC</label>
-                                        <input class="form-control py-4" id="inputRfc" type="text" name="payerRfc" placeholder="Ingrese su RFC" />
+                                        <label class="small mb-1" for="payerRfc">RFC</label>
+                                        <input class="form-control py-4 {{ $errors->first('payerRfc') ? 'is-invalid' : '' }}"
+                                               id="payerRfc"
+                                               type="text"
+                                               name="payerRfc"
+                                               value="{{ old('payerRfc') }}"
+                                               placeholder="Ingrese su RFC" />
+                                        {!! $errors->first('payerRfc', '<div class="invalid-feedback">:message</div>') !!}
+                                    </div>
+                                    <div class="form-group captcha">
+                                        <span>{!! captcha_img() !!}</span>
+                                        <button type="button" class="btn btn-danger" class="reload" id="reload">
+                                            Reload &#x21bb;
+                                        </button>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="captcha" class="sr-only">Captcha</label>
+                                        <input class="form-control py-4 {{ $errors->first('captcha') ? 'is-invalid' : '' }}" id="captcha" type="text" name="captcha" placeholder="Captura los valores de la imagen" />
+                                        {!! $errors->first('captcha', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox">
@@ -56,4 +79,19 @@
         </footer>
     </div>
 </div>
+@stop
+
+@section('scripts')
+    <script>
+        $('#reload').click(function () {
+            $.ajax({
+                type: 'GET',
+                url: 'reload-captcha',
+                success: function (data) {
+                    $(".captcha span").html(data.captcha);
+                }
+            });
+        });
+
+    </script>
 @stop
